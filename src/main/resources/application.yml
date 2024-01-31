@@ -1,0 +1,8 @@
+server:
+  port: 8081
+
+domain:
+  domainMap:
+    "[httpbin.org:80]":
+      - 52.206.0.51:80
+      - 23.22.173.247:80
