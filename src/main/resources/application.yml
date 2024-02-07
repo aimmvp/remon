@@ -16,12 +16,13 @@ management:
 remon:
   urls:
     - http://httpbin.org:80
-#    - http://partersso.sktelecom.com:80
+    - http://partner.sktelecom.com/bp/login.do
   domains:
     "[httpbin.org:80]":
-      - 52.206.0.51:80
+      - 44.197.84.54:80
+      - 3.224.224.8:80
 #      - 127.0.0.1:81
-      - 23.22.173.247:80
-    "[partnersso.sktelecom.com:80]":
-      - 220.103.244.120:80
-      - 127.0.0.1:81
+#      - 23.22.173.247:80
+    "[http://partnersso.sktelecom.com]":
+      - 3.33.139.32:80
+#      - 223.130.195.95

@@ -40,7 +40,8 @@ public class DomainClient {
 
                         try (CloseableHttpResponse result = httpClient.execute(req) ){
                             results.add(result);
-                            new DomainClientLogManager(key, it);
+
+                            new DomainClientLogManager(result, key, it);
                         } catch (IOException ex) {
                             new DomainClientLogManager(key, it, ex);
 //                            throw new DomainClientException(key, it, ex.getLocalizedMessage(), ex.getCause());
