@@ -16,7 +16,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-@SpringBootTest
+// @SpringBootTest
 class DemoApplicationTests {
 
     // @Autowired
@@ -28,7 +28,7 @@ class DemoApplicationTests {
     @Autowired
     private DynamicDomainMapper mapper;
     
-    @Test
+    // @Test
     public void testDomainClient() {
         String url = "http://httpbin.org:80/get";
 

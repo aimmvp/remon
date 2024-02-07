@@ -1,5 +1,6 @@
 package com.skcc.domain;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +14,7 @@ import lombok.Getter;
 public class DomainClientProperties {
     
     private Map<String, List<String>> domainMap = new HashMap<>();
+    private List<String> domainList = new ArrayList<>();
     private Long connectionTimeout = 1000L;
     private Long responseTimeout = 5000L;
 

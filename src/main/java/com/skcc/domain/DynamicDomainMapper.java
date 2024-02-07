@@ -29,9 +29,6 @@ public class DynamicDomainMapper {
         } catch(NumberFormatException ex) {
             return address;
         }
-
-        log.debug("call ip {}, port {}", ip, port);
-
         return new InetSocketAddress(ip, port);
     }
 

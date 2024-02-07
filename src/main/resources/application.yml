@@ -1,8 +1,27 @@
 server:
   port: 8081
 
-domain:
-  domainMap:
+logging:  
+  file:
+    name: logs/app.log
+    max-size: 10MB
+    max-history: 5
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "refresh"
+
+remon:
+  urls:
+    - http://httpbin.org:80
+#    - http://partersso.sktelecom.com:80
+  domains:
     "[httpbin.org:80]":
       - 52.206.0.51:80
+#      - 127.0.0.1:81
       - 23.22.173.247:80
+    "[partnersso.sktelecom.com:80]":
+      - 220.103.244.120:80
+      - 127.0.0.1:81
