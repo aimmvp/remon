@@ -29,24 +29,29 @@ public class DomainClient {
 
         properties.getUrls().forEach(url -> {
             HttpGet req = new HttpGet(url);
+            log.error("url ::: [{}]", url);
             try {
                 String key = new StringBuffer(req.getUri().getHost()).append(":").append(req.getUri().getPort()).toString();
 
-
+                log.error("Optional If : [{}]", properties.getDomains().get(key));
                 Optional.ofNullable(properties.getDomains().get(key)).orElse(List.of(key)).forEach(it -> {
                     try (CloseableHttpClient httpClient = httpclientBuilder.build()){
 
+                        log.error("key : [{}] / Optional : [{}]", key, Optional.ofNullable(it).orElse(key));
                         mapper.update(key, Optional.ofNullable(it).orElse(key));
 
                         try (CloseableHttpResponse result = httpClient.execute(req) ){
                             results.add(result);
 
+                            log.error("==> Success");
                             new DomainClientLogManager(result, key, it);
                         } catch (IOException ex) {
+                            log.error("==> IOException");
                             new DomainClientLogManager(key, it, ex);
 //                            throw new DomainClientException(key, it, ex.getLocalizedMessage(), ex.getCause());
                         }
                     } catch (IOException ex) {
+                        log.error("333333333333");
                         new DomainClientLogManager(key, it, ex);
 //                        throw new DomainClientException(key, it, ex.getLocalizedMessage(), ex.getCause());
                     }
