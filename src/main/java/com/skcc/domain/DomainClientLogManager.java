@@ -13,6 +13,7 @@ public class DomainClientLogManager {
     public DomainClientLogManager(String domain, String ipPort) {
         log.error("{}을 {}로 호출에 성공했습니다.", domain, ipPort);
     }
+    // 호출 에러
     public DomainClientLogManager(String domain, String ipPort, Exception ex) {
         String errorMessage = "";
         String[] messages = ex.getLocalizedMessage().split("failed: ");
@@ -26,9 +27,7 @@ public class DomainClientLogManager {
         log.error("########## Fail End ###########");
     }
 
-    public DomainClientLogManager(CloseableHttpResponse response, String domain, String ipPort) {
-        log.error("########## Success ###########");
-        log.error("[{}] / [{}]", domain, ipPort);
+    public DomainClientLogManager(String reqUrl, CloseableHttpResponse response, String domain, String ipPort) {
         HttpEntity entity = response.getEntity();
         if (entity != null) {
             // HttpEntity를 사용하여 본문 처리
@@ -37,16 +36,16 @@ public class DomainClientLogManager {
                 responseBody = EntityUtils.toString(entity);
                 int statusCode = response.getCode();
                 if (statusCode >= 300 && statusCode < 400 ) {
-                    log.error("Location : [{}]", response.getFirstHeader("Location").getValue());
+                    String location = response.getFirstHeader("Location").getValue();
+                    log.error("{}을 {}로 호출하여 resopnse code 로 {}을 받아서 {}로 redirection 되었습니다.", reqUrl, ipPort, response.getCode(), location);
+                } else {
+                    log.error("{}을 {}로 호출하여 response code 로 {}을 받았습니다.", reqUrl, ipPort, response.getCode() );
                 }
             } catch (IOException e) {
                 throw new RuntimeException(e);
             } catch (ParseException e) {
                 throw new RuntimeException(e);
             }
-            log.error("Response Code : {}", response.getCode());
-            log.error("Response Reason : {}", response.getReasonPhrase());
-            log.error("Response body : {}", responseBody);
         } else {
             log.error("##### entity is not null");
         }

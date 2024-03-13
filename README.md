@@ -12,3 +12,8 @@ $ mvn package
 ```
 $ java -jar -Dserver.port=9000 spring-boot-helloworld-0.0.1-SNAPSHOT.jar
 ```
+
+### SSOSESSION 입력 위치
+```
+DomainCLient.java
+```
