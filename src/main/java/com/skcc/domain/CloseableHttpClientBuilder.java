@@ -28,7 +28,9 @@ public class CloseableHttpClientBuilder {
      }
 
     public CloseableHttpClient build() {
-        return HttpClientBuilder.create().disableCookieManagement().useSystemProperties()
+        return HttpClientBuilder.create()
+                .disableCookieManagement()
+                .useSystemProperties()
                 .setConnectionManager(new DomainHttpClientConnectionManager(getDomainRegistry(plainConnectionSocketFactory))).evictExpiredConnections()
                 .setDefaultRequestConfig(
                         RequestConfig.custom()
@@ -38,6 +40,7 @@ public class CloseableHttpClientBuilder {
                                         Timeout.of(properties.getConnectionTimeout(), TimeUnit.MILLISECONDS))
                                 .build())
                 // .setDefaultCookieStore(cookieStore)
+                .disableRedirectHandling()
                 .build();
     }
 
