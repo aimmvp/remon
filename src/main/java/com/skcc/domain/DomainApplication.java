@@ -14,16 +14,20 @@ public class DomainApplication {
     public static void main(String[] args) {
         SpringApplication.run(DomainApplication.class, args);
     }
-
     @Autowired
     private DomainClient domainClient;
 
+    @Autowired
+    private GetCookieExtention getCookieExtention;
 
     @Scheduled(cron = "0/5 * * * * *") // 5분마다 실행
     public void remonDomainClient() {
         try {
-            domainClient.execute();
+            String remonUrl = "https://partnersso.sktelecom.com/swing/skt/login.html";
+            domainClient.execute(getCookieExtention.getSessionVal(remonUrl));
         } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }

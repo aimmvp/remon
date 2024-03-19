@@ -24,13 +24,14 @@ public class DomainClient {
         this.mapper = mapper;
     }
 
-    public void execute() throws URISyntaxException {
+    public void execute(String sessionVal) throws URISyntaxException {
         List<CloseableHttpResponse> results = new ArrayList<>();
-
         properties.getUrls().forEach(url -> {
             HttpGet req = new HttpGet(url);
             // Swing Portal 에 로그인 하여 Cookie 에서 SSOSESSION 값을 복사하여 넣는다.
-            req.setHeader("Cookie", "SSOSESSION=@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+//            log.error("########[{}]", sessionVal);
+            req.setHeader("Cookie","SSOSESSION" +  sessionVal);
+//            req.setHeader("Cookie","SSOSESSION" +  sessionVal"SSOSESSION=@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
             try {
                 String key = new StringBuffer(req.getUri().getHost()).append(":").append(req.getUri().getPort()).toString();
                 Optional.ofNullable(properties.getDomains().get(key)).orElse(List.of(key)).forEach(it -> {

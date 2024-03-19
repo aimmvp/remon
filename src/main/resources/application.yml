@@ -1,7 +1,11 @@
 server:
   port: 8081
 
-logging:  
+
+logging:
+  level:
+    root: ERROR
+    com.gargoylesoftware.htmlunit: OFF
   file:
     name: logs/app.log
     max-size: 10MB
@@ -15,8 +19,8 @@ management:
 
 remon:
   urls:
-    - "http://httpbin.org:11/get"
+#    - "http://swgsso.sktelecom.com:11/mo/redirect/main.html"
+    - "http://partnersso.sktelecom.com:11/mo/redirect/main.html"
   domains:
-    "[httpbin.org:11]":
-      - "18.211.129.101:80"
-      - "18.211.129.101:81"
+    "[partnersso.sktelecom.com:11]":
+      - "172.31.226.31:9020"

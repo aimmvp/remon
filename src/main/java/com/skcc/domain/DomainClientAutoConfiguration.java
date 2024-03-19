@@ -28,6 +28,7 @@ public class DomainClientAutoConfiguration {
     public CloseableHttpClientBuilder httpclient(DomainClientProperties properties, DomainPlainConnectionSocketFactory plainConnectionSocketFactory) {
         return new CloseableHttpClientBuilder(properties, plainConnectionSocketFactory);
     }
-	
 
+    @Bean
+    public GetCookieExtention getCookieExtention() { return new GetCookieExtention(); }
 }
